@@ -13,8 +13,8 @@ Group:		System/Kernel and hardware
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/%name-%version.tar.bz2
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires(post): /sbin/install-info
-Requires(postun): /sbin/install-info
+Requires(post): info-install
+Requires(postun): info-install
     
 %description
 Like dd, dd_rescue does copy data from one file or block device to another.
