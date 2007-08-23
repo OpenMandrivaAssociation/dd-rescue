@@ -1,6 +1,6 @@
 %define name	dd_rescue
 %define version 1.12
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define _bindir /bin
 
@@ -37,7 +37,7 @@ differences:
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall_std
+%makeinstall_std INSTASROOT=""
 
 %clean
 rm -rf $RPM_BUILD_ROOT
