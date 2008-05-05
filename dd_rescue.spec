@@ -1,6 +1,6 @@
 %define name	dd_rescue
-%define version 1.12
-%define release %mkrel 3
+%define version 1.14
+%define release %mkrel 1
 
 %define _bindir /bin
 
@@ -10,7 +10,7 @@ Version:	%{version}
 Release:	%{release}
 License:	GPL
 Group:		System/Kernel and hardware
-Source0:	http://www.garloff.de/kurt/linux/ddrescue/%name-%version.tar.bz2
+Source0:	http://www.garloff.de/kurt/linux/ddrescue/%name-%version.tar.gz
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
  
