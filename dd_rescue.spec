@@ -1,5 +1,5 @@
 %define name	dd_rescue
-%define version 1.18
+%define version 1.20
 %define release %mkrel 1
 
 %define _bindir /bin
