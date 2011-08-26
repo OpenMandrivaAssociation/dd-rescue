@@ -1,18 +1,13 @@
-%define name	dd_rescue
-%define version 1.20
-%define release %mkrel 1
-
 %define _bindir /bin
 
 Summary:	Does copy data from one file or block device to another
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		dd_rescue
+Version:	1.23
+Release:	1
 License:	GPL
 Group:		System/Kernel and hardware
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/%name-%version.tar.gz
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
  
 %description
 Like dd, dd_rescue does copy data from one file or block device to another.
@@ -29,21 +24,16 @@ differences:
     promoted again after a while without errors.
 
 %prep 
-%setup -q -n %name
+%setup -q -n %{name}
 
 %build
 
 %make CFLAGS="%{optflags}"
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std INSTASROOT=""
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,0755) 
 %doc README.dd_rescue
 %{_bindir}/*
 
