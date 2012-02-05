@@ -1,5 +1,5 @@
 Name:		dd-rescue
-Version:	1.24
+Version:	1.25
 Release:	1
 Summary:	Similar to dd but can copy from source with errors
 Group:		System/Configuration/Hardware
