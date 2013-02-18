@@ -2,8 +2,8 @@
 %define debug_package          %{nil}
 
 %define name	dd_rescue
-%define version 1.28
-%define release %mkrel 1
+%define version 1.32
+%define release 1
 
 %define _bindir /bin
 
