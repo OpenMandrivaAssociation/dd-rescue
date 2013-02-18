@@ -1,12 +1,12 @@
 Name:		dd-rescue
-Version:	1.25
+Version:	1.32
 Release:	2
 Summary:	Similar to dd but can copy from source with errors
 Group:		System/Configuration/Hardware
 License:	GPLv3
 URL:		http://www.garloff.de/kurt/linux/ddrescue
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/dd_rescue-%{version}.tar.gz
-
+Provides:	dd_rescue
 
 %description
 Imagine, one of your partitions is crashed, and as there are some hard errors,
