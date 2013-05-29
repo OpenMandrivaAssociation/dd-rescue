@@ -7,6 +7,8 @@
 
 %define _bindir /bin
 
+%bcond_without	uclibc
+
 Summary:	Does copy data from one file or block device to another
 Name:		%{name}
 Version:	%{version}
@@ -15,9 +17,30 @@ License:	GPL
 Group:		System/Kernel and hardware
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/%name-%version.tar.gz
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
+%if %{with uclibc}
+BuildRequires:	uClibc-devel
+%endif
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
  
 %description
+Like dd, dd_rescue does copy data from one file or block device to another.
+You can specify file positions (called seek and Skip in dd). There are several 
+differences: 
+  o dd_rescue does not provide character conversions.
+  o The command syntax is different. Call dd_rescue -h.
+  o dd_rescue does not abort on errors on the input file, unless you specify a 
+    maximum error number. Then dd_rescue will abort when this number is reached
+  o dd_rescue does not truncate the output file, unless asked to.
+  o You can tell dd_rescue to start from the end of a file and move bcakwards.
+  o It uses two block sizes, a large (soft) block size and a small (hard) block
+    size. In case of errors, the size falls back to the small one and is
+    promoted again after a while without errors.
+
+%package -n	uclibc-%{name}
+Summary:	Does copy data from one file or block device to another (uClibc build)
+Group:		System/Kernel and hardware
+
+%description -n	uclibc-%{name}
 Like dd, dd_rescue does copy data from one file or block device to another.
 You can specify file positions (called seek and Skip in dd). There are several 
 differences: 
@@ -35,12 +58,26 @@ differences:
 %setup -q -n %name
 
 %build
+%if %{with uclibc}
+mkdir -p .uclibc
+cp -a * .uclibc
+pushd .uclibc
+%make CC="%{uclibc_cc}" CFLAGS_OPT="%{uclibc_cflags}"
+popd
+%endif
 
+mkdir -p .glibc
+cp -a * .glibc
+pushd .glibc
 %make CFLAGS="%{optflags}"
+popd
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall_std INSTASROOT=""
+%if %{with uclibc}
+install -m755 .uclibc/dd_rescue -D %{buildroot}%{uclibc_root}/bin/dd_rescue
+%endif
+
+%makeinstall_std INSTASROOT="" -C .glibc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -50,7 +87,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.dd_rescue
 %{_bindir}/*
 
-
+%if %{with uclibc}
+%files -n uclibc-%{name}
+%{uclibc_root}/bin/dd_rescue
+%endif
 
 
 %changelog
