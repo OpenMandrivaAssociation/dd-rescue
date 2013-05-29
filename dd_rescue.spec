@@ -1,6 +1,3 @@
-%define _enable_debug_packages %{nil}
-%define debug_package          %{nil}
-
 %define name	dd_rescue
 %define version 1.32
 %define release 1
@@ -77,7 +74,7 @@ popd
 install -m755 .uclibc/dd_rescue -D %{buildroot}%{uclibc_root}/bin/dd_rescue
 %endif
 
-%makeinstall_std INSTASROOT="" -C .glibc
+%makeinstall_std INSTALLFLAGS="" INSTASROOT="" -C .glibc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
