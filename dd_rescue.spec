@@ -4,7 +4,7 @@ Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
 Version:	1.33
 Release:	1
-License:	GPL
+License:	GPLv3+
 Group:		System/Kernel and hardware
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.gz
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
