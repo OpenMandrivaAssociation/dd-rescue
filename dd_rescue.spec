@@ -71,7 +71,8 @@ install -m755 .uclibc/dd_rescue -D %{buildroot}%{uclibc_root}/bin/dd_rescue
 
 %files
 %doc README.dd_rescue
-/bin/*
+/bin/dd_rescue
+%{_mandir}/man1/dd_rescue.1*
 
 %if %{with uclibc}
 %files -n uclibc-%{name}
