@@ -59,7 +59,7 @@ popd
 mkdir -p .glibc
 cp -a * .glibc
 pushd .glibc
-%make CFLAGS="%{optflags}"
+%make CFLAGS="%{optflags} -Ofast"
 popd
 
 %install
