@@ -1,2 +1,5 @@
+removed_sources:
+  dd_rescue-1.28.tar.gz: 2dbc821fa3eb8c40d0c291b047c66868708cc55b
+  dd_rescue-1.32.tar.gz: c71630a3311d9d9c8e2105b5c4032a49d1e6ed78
 sources:
-  dd_rescue-1.33.tar.gz: cb21524fec919d32b7263b7999e2c8b26e7273cd
+  dd_rescue-1.40.tar.gz: 7ba7f34124f30ec5a8d8427fe76bc37bae6df9b8
