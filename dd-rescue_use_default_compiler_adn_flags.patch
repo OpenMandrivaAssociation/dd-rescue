@@ -1,0 +1,67 @@
+--- a/Makefile
++++ b/Makefile
+@@ -7,7 +7,7 @@
+ DESTDIR = 
+ SRCDIR ?= .
+ 
+-CC = gcc
++CC ?= gcc
+ SHELL = /bin/bash
+ RPM_OPT_FLAGS ?= -Os -Wall -g -D_FORTIFY_SOURCE=2
+ CFLAGS = $(RPM_OPT_FLAGS) $(EXTRA_CFLAGS) -DHAVE_CONFIG_H -I .
+@@ -286,19 +286,19 @@
+ 
+ # The plugins
+ libddr_hash.so: libddr_hash.po md5.po sha256.po sha512.po sha1.po pbkdf2.po checksum_file.po
+-	$(CC) -shared -o $@ $^ $(EXTRA_LDFLAGS)
++	$(CC) -shared -o $@ $^ $(LDFLAGS) $(EXTRA_LDFLAGS)
+ 
+ libddr_MD5.so: libddr_hash.so
+-	ln -sf $< $@
++	ln -sf $< $@ 
+ 
+ libddr_lzo.so: libddr_lzo.po
+-	$(CC) -shared -o $@ $^ -llzo2
++	$(CC) -shared -o $@ $^ -llzo2  $(LDFLAGS)
+ 
+ libddr_null.so: libddr_null.po
+-	$(CC) -shared -o $@ $^
++	$(CC) -shared -o $@ $^  $(LDFLAGS)
+ 
+ libddr_crypt.so: libddr_crypt.po aes.po aes_c.po $(AESNI_PO) $(AES_ARM64_PO) $(AES_OSSL_PO) pbkdf2.po sha256.po pbkdf_ossl.po md5.po checksum_file.po secmem.po random.po $(POBJECTS2)
+-	$(CC) -shared -o $@ $^ $(CRYPTOLIB) $(EXTRA_LDFLAGS)
++	$(CC) -shared -o $@ $^ $(CRYPTOLIB) $(EXTRA_LDFLAGS)
+ 
+ # More special compiler flags
+ find_nonzero.o: $(SRCDIR)/find_nonzero.c
+@@ -356,14 +356,14 @@
+ # TODO: Build binaries from .o file, so we can save some special rules ...
+ # Special dd_rescue variants
+ libfalloc: $(SRCDIR)/dd_rescue.c $(DDR_HEADERS) $(OBJECTS) $(OBJECTS2)
+-	$(CC) $(CFLAGS) $(PIE) $(LDPIE) -DNO_LIBDL $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) -lfallocate $(EXTRA_LDFLAGS) $(RDYNAMIC)
++	$(CC) $(CFLAGS) $(PIE) $(LDPIE) -DNO_LIBDL $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) -lfallocate  $(LDFLAGS) $(EXTRA_LDFLAGS) $(RDYNAMIC)
+ 
+ libfalloc-static: $(SRCDIR)/dd_rescue.c $(DDR_HEADERS) $(OBJECTS) $(OBJECTS2)
+-	$(CC) $(CFLAGS) $(PIE) $(LDPIE) -DNO_LIBDL $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(LIBDIR)/libfallocate.a $(EXTRA_LDFLAGS) $(RDYNAMIC)
++	$(CC) $(CFLAGS) $(PIE) $(LDPIE) -DNO_LIBDL $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(LIBDIR)/libfallocate.a $(LDFLAGS)  $(EXTRA_LDFLAGS) $(RDYNAMIC)
+ 
+ # This is the default built
+ dd_rescue: $(SRCDIR)/dd_rescue.c $(DDR_HEADERS) $(OBJECTS) $(OBJECTS2)
+-	$(CC) $(CFLAGS) $(PIE) $(LDPIE) $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) -ldl $(EXTRA_LDFLAGS) $(RDYNAMIC)
++	$(CC) $(CFLAGS) $(PIE) $(LDPIE) $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) -ldl  $(LDFLAGS) $(EXTRA_LDFLAGS) $(RDYNAMIC)
+ 
+ # Test programs 
+ md5: $(SRCDIR)/md5.c $(SRCDIR)/md5.h $(SRCDIR)/hash.h config.h
+@@ -394,10 +394,10 @@
+ 	$(CC) $(CFLAGS) -DNO_LIBDL -DNO_LIBFALLOCATE $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2)
+ 
+ nocolor: $(SRCDIR)/dd_rescue.c $(DDR_HEADERS) $(OBJECTS) $(OBJECTS2)
+-	$(CC) $(CFLAGS) -DNO_COLORS=1 $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(EXTRA_LDFLAGS) $(RDYNAMIC)
++	$(CC) $(CFLAGS) -DNO_COLORS=1 $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(LDFLAGS) $(EXTRA_LDFLAGS) $(RDYNAMIC)
+ 
+ static: $(SRCDIR)/dd_rescue.c $(DDR_HEADERS) $(OBJECTS)
+-	$(CC) $(CFLAGS) -DNO_LIBDL -DNO_LIBFALLOCATE -static $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(EXTRA_LDFLAGS)
++	$(CC) $(CFLAGS) -DNO_LIBDL -DNO_LIBFALLOCATE -static $(DEFINES) $< $(OUT) $(OBJECTS) $(OBJECTS2) $(LDFLAGS) $(EXTRA_LDFLAGS)
+ 
+ # Special pseudo targets
+ strip: $(TARGETS) $(LIBTARGETS)

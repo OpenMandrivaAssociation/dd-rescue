@@ -1,6 +1,3 @@
-%define _enable_debug_packages %{nil}
-%define debug_package          %{nil}
-
 Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
 Version:	1.99.12
@@ -9,6 +6,10 @@ License:	GPL
 Group:		System/Kernel and hardware
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
 Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.bz2
+Patch0:		dd-rescue_use_default_compiler_adn_flags.patch
+
+BuildRequires:	pkgconfig(lzo2)
+BuildRequires:	pkgconfig(openssl)
 
 %description
 Like dd, dd_rescue does copy data from one file or block device to another.
@@ -37,10 +38,10 @@ differences:
 %autosetup -p1
 
 %build
-./autogen.sh
+autoreconf -vif
 %configure
-%make_build
+%make_build RPM_OPT_FLAGS="%{optflags}" LIB=%{_lib}
 
 %install
-%make_install INSTASROOT=""
+%make_install INSTASROOT="" INSTALLFLAGS="" LIB=%{_lib}
 
