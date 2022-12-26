@@ -1,8 +1,6 @@
 %define _enable_debug_packages %{nil}
 %define debug_package          %{nil}
 
-%define _bindir /bin
-
 Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
 Version:	1.99.12
@@ -39,6 +37,8 @@ differences:
 %autosetup -p1
 
 %build
+./autogen.sh
+%configure
 %make_build
 
 %install
