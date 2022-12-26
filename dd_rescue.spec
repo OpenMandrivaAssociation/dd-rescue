@@ -5,13 +5,13 @@
 
 Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
-Version:	1.40
-Release:	2
+Version:	1.99.12
+Release:	1
 License:	GPL
 Group:		System/Kernel and hardware
-Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.gz
 URL:		http://www.garloff.de/kurt/linux/ddrescue/
- 
+Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.bz2
+
 %description
 Like dd, dd_rescue does copy data from one file or block device to another.
 You can specify file positions (called seek and Skip in dd). There are several 
@@ -26,20 +26,21 @@ differences:
     size. In case of errors, the size falls back to the small one and is
     promoted again after a while without errors.
 
+%files
+%doc README.dd_rescue
+%{_bindir}/%{name}
+%{_libdir}/libddr_*.so
+%{_mandir}/man1/%{name}.1.*
+%{_mandir}/man1/ddr_*.1.*
+
+#--------------------------------------------------------------------
+
 %prep 
-%setup -qn %{name}
+%autosetup -p1
 
 %build
-
-%make
+%make_build
 
 %install
-%makeinstall_std INSTASROOT=""
+%make_install INSTASROOT=""
 
-%clean
-
-%files
-%defattr(-,root,root,0755) 
-%doc README.dd_rescue
-%{_bindir}/*
-%{_mandir}/man1/*
