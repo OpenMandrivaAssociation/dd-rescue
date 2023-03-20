@@ -1,6 +1,6 @@
 Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
-Version:	1.99.12
+Version:	1.99.13
 Release:	1
 License:	GPL
 Group:		System/Kernel and hardware
