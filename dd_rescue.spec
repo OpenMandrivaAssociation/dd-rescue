@@ -4,7 +4,7 @@ Version:	1.99.13
 Release:	1
 License:	GPL
 Group:		System/Kernel and hardware
-URL:		http://www.garloff.de/kurt/linux/ddrescue/
+URL:		https://www.garloff.de/kurt/linux/ddrescue/
 Source0:	https://downloads.sourceforge.net/ddrescue/%{name}-%{version}.tar.bz2
 #Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.bz2
 Patch0:		dd-rescue_use_default_compiler_adn_flags.patch
