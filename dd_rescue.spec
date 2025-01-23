@@ -7,7 +7,7 @@ Group:		System/Kernel and hardware
 URL:		https://www.garloff.de/kurt/linux/ddrescue/
 Source0:	https://downloads.sourceforge.net/ddrescue/%{name}-%{version}.tar.bz2
 #Source0:	http://www.garloff.de/kurt/linux/ddrescue/%{name}-%{version}.tar.bz2
-Patch0:		dd-rescue_use_default_compiler_adn_flags.patch
+#Patch0:		dd-rescue_use_default_compiler_adn_flags.patch
 
 BuildRequires:	pkgconfig(lzo2)
 BuildRequires:	pkgconfig(openssl)
