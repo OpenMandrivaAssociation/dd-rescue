@@ -1,7 +1,7 @@
 Summary:	Does copy data from one file or block device to another
 Name:		dd_rescue
 Version:	1.99.22
-Release:	1
+Release:	2
 License:	GPL
 Group:		System/Kernel and hardware
 URL:		https://www.garloff.de/kurt/linux/ddrescue/
